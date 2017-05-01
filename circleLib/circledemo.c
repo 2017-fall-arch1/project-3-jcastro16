@@ -3,25 +3,30 @@
 #include <lcddraw.h>
 #include "abCircle.h"
 
-AbRect rect10 = {abRectGetBounds, abRectCheck, {10,10}};; /**< 10x10 rectangle */
+AbRect rect10 = {abRectGetBounds, abRectCheck, {12,3}};; /**< 12x3 rectangle */
 
-u_int bgColor = COLOR_BLUE;
+u_int bgColor = COLOR_BLACK;
 
-
-Layer layer1 = {		/**< Layer with a red square */
+//Layer that is to be represented as the lower paddle
+Layer layer1 = {    
   (AbShape *)&rect10,
-  {screenWidth/2, screenHeight/2}, /**< center */
-  {0,0}, {0,0},				    /* next & last pos */
-  COLOR_RED,
-  0
+  {screenWidth/2,(screenHeight/2)+60}, /**< bottom of the screen */
+  {0,0}, {0,0}, COLOR_BLUE, 0	   /* next & last pos */
 };
 
-Layer layer0 = {		/**< Layer with an orange circle */
-  (AbShape *)&circle14,
-  {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
-  {0,0}, {0,0},				    /* next & last pos */
-  COLOR_ORANGE,
-  &layer1,
+//Layer to be represnted for the ball
+Layer layer0 = { 
+  (AbShape *)&circle8,
+  {(screenWidth/2), (screenHeight/2)}, /**< centered at half of the screen */
+  {0,0}, {0,0}, COLOR_WHITE, &layer1      /* next & last pos */
+};
+
+//Layer to be represented for the upper paddle
+
+Layer layer2 = {
+  (AbShape *)&rect10,
+  {screenWidth/2, (screenHeight/2)+30},
+  {0,0}, {0,0}, COLOR_BLUE, 0
 };
 
 int
