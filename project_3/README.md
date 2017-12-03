@@ -1,7 +1,7 @@
   Project 3: LCD Game
 
 ## Project Description
-This project is called "Double Pong". It is meant to be played by a single player by pressing SW1/SW2 for lower lower paddle and SW3/SW4 for upper paddle.
+This project is called "Double Pong". It is meant to be played by a single player by pressing SW1/SW2 for lower paddle and SW3/SW4 for upper paddle.
 ## Objective
 The objective of the game is to keep the ball in between both paddles to increase score by one everytime the ball interacts with either the upper paddle or the lower paddle. Once it hits the the upper or lower part of the game field, itsgame over. You can play multiple times to try to beat your previous score.
 

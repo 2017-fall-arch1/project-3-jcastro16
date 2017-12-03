@@ -2,7 +2,7 @@
 #include "buzzer.h"
 
 void buzzer_init(){
-  timerAUpmode();              /*used to drive speake*/
+  timerAUpmode();              /*used to drive speaker*/
   P2SEL2 &= ~(BIT6|BIT7);     
   P2SEL &= ~BIT7;
   P2SEL |= BIT6;

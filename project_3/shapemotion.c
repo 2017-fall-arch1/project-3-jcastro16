@@ -13,13 +13,19 @@
 #include <stdio.h>
 
 #define GREEN_LED BIT6
-//fdsa
-char playerScore = 0; //Score text
-char gameActive = 0; //if game is in session
-char gameOver = 0;  //if game is not in session
 
+// Score text area
+char playerScore = 0;
+// Checks if game is in session
+char gameActive = 0; 
+//If game is not in session or Game Over
+char gameOver = 0;
+
+
+//Initial screen Color
 u_int bgColor = COLOR_WHITE;  //Initial screen color
-int redrawScreen = 1; /**< Boolean for whether screen needs to be redrawn */
+//Boolean for whether screen needs to be redrawn
+int redrawScreen = 1;
 u_int score = 0;
 
 Region fieldFence;          //Fence around playing field
