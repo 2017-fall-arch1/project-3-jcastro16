@@ -281,40 +281,40 @@ void wdt_c_handler()
       ml0.velocity.axes[0] = 0;
     }
 
-    /****** Move Paddle state (Assembly) *********/
+    /****** Move Paddle state (Assembly) from Above *********/
     /*
                  .data
-      switches : .word
-      ml0      : .word
+      switches : .word                        ; switches -> int
+      ml0      : .word                        ; ml0 -> pointer
 
                  .text
-      switch1   :
-                 mov &switches  , r12
-                 mov #-1        , r13
-                 xor r12        , r13
-                 and #1         , r13
-                 cmp #0         , r13
+      switch1   :                             ; start state
+                 mov &switches  , r12         ; r12 -> switches
+                 mov #-1        , r13         ; r13, all 1s in binary
+                 xor r12        , r13         ; effectively !switches
+                 and #1         , r13         ; and with 1
+                 cmp #0         , r13         ; r13 - 0
                  JZ switch2
-                 mov &ml0       , r4
-                 mov #-3        , 0(r4)
+                 mov &ml0       , r4          ; r4 is ml0
+                 mov #-3        , 0(r4)       ; ml0.velocity.axes[0] = -3
 		 JMP end
 
-      switch2   :mov &switches  , r12
-		 mov #-1        , r13
-		 xor r12        , r13
-		 and #2         , r13
-		 cmp #0         , r13
+      switch2   :mov &switches  , r12         ; r12 -> switches
+		 mov #-1        , r13         ; r13, all 1s in binary 
+		 xor r12        , r13         ; effectively !switches
+		 and #2         , r13         ; and with 2
+		 cmp #0         , r13         ; r13 - 0
 		 JZ not1or2
-		 mov &ml0       , r4
-		 mov 2(r4)      , r5
-		 mov #3         , 0(r5)
+		 mov &ml0       , r4          ; r4 -> ml0
+		 mov 2(r4)      , r5          ; r5 -> ml0.velocity
+		 mov #3         , 0(r5)       ; ml0.velocity.axes[] = 3
 		 JMP end
 
-      not1or2  :mov &ml0       , r4
-                mov 2(r4)      , r5
-                mov #0         , 0(r5)
+      not1or2  :mov &ml0       , r4           ; r4 is ml0
+                mov 2(r4)      , r5           ; r5 is ml0.velocity
+                mov #0         , 0(r5)        ; ml0.velocity.axes[0] = 0 
 		
-      end      :
+      end      :                              ; proceed function
 
      */
 
