@@ -281,6 +281,45 @@ void wdt_c_handler()
       ml0.velocity.axes[0] = 0;
     }
 
+    /****** Move Paddle state (Assembly) *********/
+    /*
+                 .data
+      switches : .word
+      ml0      : .word
+
+                 .text
+      switch1   :
+                 mov &switches  , r12
+                 mov #-1        , r13
+                 xor r12        , r13
+                 and #1         , r13
+                 cmp #0         , r13
+                 JZ switch2
+                 mov &ml0       , r4
+                 mov #-3        , 0(r4)
+		 JMP end
+
+      switch2   :mov &switches  , r12
+		 mov #-1        , r13
+		 xor r12        , r13
+		 and #2         , r13
+		 cmp #0         , r13
+		 JZ not1or2
+		 mov &ml0       , r4
+		 mov 2(r4)      , r5
+		 mov #3         , 0(r5)
+		 JMP end
+
+      not1or2  :mov &ml0       , r4
+                mov 2(r4)      , r5
+                mov #0         , 0(r5)
+		
+      end      :
+
+     */
+
+
+    
     //same instructions as above but for switches 3 and 4
     if(!(switches & 4)){
       ml1.velocity.axes[0] = -3;
